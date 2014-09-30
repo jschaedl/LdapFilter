@@ -56,13 +56,13 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 	public function testComplexFilterOne() {
 		$filterOperator = $this->operatorBuilder->_or(array(
 			$this->criteriaBuilder->equal('cn', 'jschaedl'), 
-			$this->criteriaBuilder->equal('mail', 'M.Krabbemeyer@hs-osnabrueck.de'),
+			$this->criteriaBuilder->equal('mail', 'J.Schaedlich@hs-osnabrueck.de'),
 			$this->operatorBuilder->_and(array(
 				$this->criteriaBuilder->equal('fhosGebdat', '29.03.1983'), 
 			))
 		));
 		$this->assertEquals(
-			'(|(cn=jschaedl)(mail=M.Krabbemeyer@hs-osnabrueck.de)(&(fhosGebdat=29.03.1983)))', 
+			'(|(cn=jschaedl)(mail=J.Schaedlich@hs-osnabrueck.de)(&(fhosGebdat=29.03.1983)))', 
 			$filterOperator->toString()
 		);
 		
@@ -71,15 +71,15 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 	public function testComplexFilterTwo() {
 		$filterOperator = $this->operatorBuilder->_and(array(
 			$this->criteriaBuilder->present('cn'),
-			$this->criteriaBuilder->present('fhosCardOwnerID'),
+			$this->criteriaBuilder->present('id'),
 			$this->operatorBuilder->_or(array(
-				$this->criteriaBuilder->equal('fhosProfileImageApproved', 'TRUE'),
-				$this->criteriaBuilder->equal('fhosProfileImagePrinted', 'TRUE')
+				$this->criteriaBuilder->equal('approved', 'TRUE'),
+				$this->criteriaBuilder->equal('printed', 'TRUE')
 			))
 		));
 		
 		$this->assertEquals(
-			'(&(cn=*)(fhosCardOwnerID=*)(|(fhosProfileImageApproved=TRUE)(fhosProfileImagePrinted=TRUE)))', 
+			'(&(cn=*)(id=*)(|(approved=TRUE)(printed=TRUE)))', 
 			$filterOperator->toString()
 		);
 	}
