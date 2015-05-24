@@ -3,10 +3,6 @@
 This is a PHP library to create LDAP filters with a simple to use object oriented api. It is build for PHP 5.3+.
 
 [![Build Status](https://travis-ci.org/jschaedl/php-ldapfilter.svg?branch=master)](https://travis-ci.org/jschaedl/php-ldapfilter)
-[![Latest Stable Version](https://poser.pugx.org/jschaedl/ldapfilter/v/stable)](https://packagist.org/packages/jschaedl/php-ldapfilter) 
-[![Total Downloads](https://poser.pugx.org/jschaedl/ldapfilter/downloads)](https://packagist.org/packages/jschaedl/php-ldapfilter) 
-[![Latest Unstable Version](https://poser.pugx.org/jschaedl/ldapfilter/v/unstable)](https://packagist.org/packages/jschaedl/php-ldapfilter) 
-[![License](https://poser.pugx.org/jschaedl/ldapfilter/license)](https://packagist.org/packages/jschaedl/php-ldapfilter)
 ![PHP Version](https://img.shields.io/badge/version-PHP%205.3%2B-lightgrey.svg)
 
 
@@ -38,11 +34,7 @@ Currently, the library supports to create the following LDAP filters:
 
 ### Example
 
-```php
- 
-	// to be done
- 
- ```	
+...	
 
 ### Unit Testing
 
