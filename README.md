@@ -20,8 +20,8 @@ Currently, the library supports to create the following LDAP filters:
 
 | Criterias   | Description       | Filter example |
 |:-----------:|:-----------------:|:--------------|
-| `=`         | *equals to*       | `(firstname = John)` |
-| `~`         | *differs from*    | `(name ~ Smith)` |
+| `=`         | *equals to*       | `(firstname = Jan)` |
+| `~`         | *differs from*    | `(lastname ~ Schaedlich)` |
 | `>`         | *more than*       | `(height > 1.6)` |
 | `>=`        | *more or equals*  | `(height >= 1.6)` |
 | `<`         | *less than*       | `(age < 20)` |
@@ -29,10 +29,11 @@ Currently, the library supports to create the following LDAP filters:
 
 
 | Operator    | Description       | Filter example |
+|:-----------:|:-----------------:|:--------------|
 | `!`         | *not*             | `!(age<10)` |
-| `&`         | *and*             | `&(name=Doe)(firstname=John)` |
+| `&`         | *and*             | `&(name=Schaedlich)(firstname=Jan)` |
 | `PIPE`      | *or*              | `PIPE(age<10)(male=true)` |
-| *wildcards* | *matches all*     |	`&(firstname=J*)(name=Do?)` |
+| *wildcards* | *matches all*     |	`&(firstname=J*)(name=Sch?)` |
 | *types*     | *conforms to*     | `(objectClass=Person)` |
 
 ### Example
