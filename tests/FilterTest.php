@@ -4,7 +4,6 @@ namespace tests;
 
 use Ldap\FilterCriteriaBuilder;
 use Ldap\FilterOperatorBuilder;
-use Ldap\Filter;
 
 
 class FilterTest extends \PHPUnit_Framework_TestCase
@@ -21,44 +20,65 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 		$this->filter = null;
 	}
 	
-	public function testFilterCriteriaEqual() {
-		$filterCriteria = $this->criteriaBuilder->equal('cn', 'jschaedl');
+	public function testFilterCriteriaEquals() {
+		$filterCriteria = $this->criteriaBuilder->equals('cn', 'jschaedl');
 		$this->assertEquals('(cn=jschaedl)', $filterCriteria->toString());
 	}
 	
+	public function testFilterCriteriaDiffers() {
+	    $filterCriteria = $this->criteriaBuilder->differs('cn', 'jschaedl');
+	    $this->assertEquals('(cn~jschaedl)', $filterCriteria->toString());
+	}
+	
 	public function testFilterCriteriaGreaterThan() {
-		$filterCriteria = $this->criteriaBuilder->gt('fhosCardCount', '10');
+		$filterCriteria = $this->criteriaBuilder->greaterThan('fhosCardCount', '10');
 		$this->assertEquals('(fhosCardCount>10)', $filterCriteria->toString());
 	}
 	
+	public function testFilterCriteriaGreaterThanAndEquals() {
+	    $filterCriteria = $this->criteriaBuilder->greaterThanAndEquals('fhosCardCount', '10');
+	    $this->assertEquals('(fhosCardCount>=10)', $filterCriteria->toString());
+	}
+	
 	public function testFilterCriteriaLesserThan() {
-		$filterCriteria = $this->criteriaBuilder->lt('fhosCardCount', '10');
+		$filterCriteria = $this->criteriaBuilder->lesserThan('fhosCardCount', '10');
 		$this->assertEquals('(fhosCardCount<10)', $filterCriteria->toString());
 	}
 	
+	public function testFilterCriteriaLesserThanAndEquals() {
+	    $filterCriteria = $this->criteriaBuilder->lesserThanAndEquals('fhosCardCount', '10');
+	    $this->assertEquals('(fhosCardCount<=10)', $filterCriteria->toString());
+	}
+	
 	public function testFilterCriteriaPresent() {
-		$filterCriteria = $this->criteriaBuilder->present('fhosCardOwnerID');
-		$this->assertEquals('(fhosCardOwnerID=*)', $filterCriteria->toString());
+		$filterCriteria = $this->criteriaBuilder->matchesAll('fhosCardOwnerId');
+		$this->assertEquals('(fhosCardOwnerId=*)', $filterCriteria->toString());
 	}
 	
 	public function testFilterOperatorAND() {
-		$filterCriteria = $this->criteriaBuilder->equal('cn', 'jschaedl');
+		$filterCriteria = $this->criteriaBuilder->equals('cn', 'jschaedl');
 		$filterOperator = $this->operatorBuilder->_and(array($filterCriteria));
 		$this->assertEquals('(&(cn=jschaedl))', $filterOperator->toString());
 	}
 	
 	public function testFilterOperatorOR() {
-		$filterCriteria = $this->criteriaBuilder->equal('cn', 'jschaedl');
+		$filterCriteria = $this->criteriaBuilder->equals('cn', 'jschaedl');
 		$filterOperator = $this->operatorBuilder->_or(array($filterCriteria));
 		$this->assertEquals('(|(cn=jschaedl))', $filterOperator->toString());
 	}
 	
+	public function testFilterOperatorNOT() {
+	    $filterCriteria = $this->criteriaBuilder->equals('cn', 'jschaedl');
+	    $filterOperator = $this->operatorBuilder->_not(array($filterCriteria));
+	    $this->assertEquals('(!(cn=jschaedl))', $filterOperator->toString());
+	}
+	
 	public function testComplexFilterOne() {
 		$filterOperator = $this->operatorBuilder->_or(array(
-			$this->criteriaBuilder->equal('cn', 'jschaedl'), 
-			$this->criteriaBuilder->equal('mail', 'J.Schaedlich@hs-osnabrueck.de'),
+			$this->criteriaBuilder->equals('cn', 'jschaedl'), 
+			$this->criteriaBuilder->equals('mail', 'J.Schaedlich@hs-osnabrueck.de'),
 			$this->operatorBuilder->_and(array(
-				$this->criteriaBuilder->equal('fhosGebdat', '29.03.1983'), 
+				$this->criteriaBuilder->equals('fhosGebdat', '29.03.1983'), 
 			))
 		));
 		$this->assertEquals(
@@ -70,11 +90,11 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 	
 	public function testComplexFilterTwo() {
 		$filterOperator = $this->operatorBuilder->_and(array(
-			$this->criteriaBuilder->present('cn'),
-			$this->criteriaBuilder->present('id'),
+			$this->criteriaBuilder->matchesAll('cn'),
+			$this->criteriaBuilder->matchesAll('id'),
 			$this->operatorBuilder->_or(array(
-				$this->criteriaBuilder->equal('approved', 'TRUE'),
-				$this->criteriaBuilder->equal('printed', 'TRUE')
+				$this->criteriaBuilder->equals('approved', 'TRUE'),
+				$this->criteriaBuilder->equals('printed', 'TRUE')
 			))
 		));
 		
