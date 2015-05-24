@@ -1,0 +1,11 @@
+/.project
+/.buildpath
+/.settings/
+vendor/
+composer.lock
+composer.phar
+/.DS*
+/tests/report/*
+/tests/report/logs/*
+/tests/report/coverage/*
+/docs
