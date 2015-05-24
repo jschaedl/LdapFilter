@@ -1,5 +1,5 @@
 {
-	"name" : "jschaedl/LdapFilter",
+	"name" : "jschaedl/php-ldapfilter",
 	"type" : "library",
 	"description" : "ldap filter api utility",
 	"keywords" : [
@@ -8,7 +8,7 @@
 		"api",
 		"utility"
 	],
-	"homepage" : "http://github.com/jschaedl/LdapFilter",
+	"homepage" : "http://github.com/jschaedl/php-ldapfilter",
 	"license" : "MIT",
 	"authors" : [{
 			"name" : "Jan Schaedlich",
